@@ -5,9 +5,9 @@ A simple CRUD compliant backend API created using NodeJS and Express framework c
 The data expected by the server is of the following shape
 
     Todo {
-    id: { type: String, required: true },
-    message: { type: String, required: true },
-    completed: { type: Boolean, required: true },
+    id: String,
+    message: String,
+    completed: Boolean,
     }
 
 Following are the exposed API endpoints:
