@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const taskSchema = new Schema(
   {
-    taskName: { type: String, required: true },
-    taskDesc: { type: String, required: true },
+    id: { type: String, required: true },
+    message: { type: String, required: true },
     completed: { type: Boolean, required: true },
   },
   { timestamps: true }

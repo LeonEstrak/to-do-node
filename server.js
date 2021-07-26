@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
@@ -23,7 +23,7 @@ connection.once("open", () =>
 app.use(cors());
 app.use(express.json());
 
-app.use("/task", require(__dirname + "/routes/addTask"));
+app.use("", require(__dirname + "/routes/handler.Task"));
 
 app.listen(port, () => {
   console.log("\nServer is running on port: ");
