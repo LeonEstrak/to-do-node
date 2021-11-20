@@ -1,47 +1,51 @@
-const Task = require("../models/tasks_model");
+const Student = require("../models/student_model");
 const router = require("express").Router();
 
-router.route("/todo").get((req, res) => {
-  Task.find()
-    .then((task) => res.status(200).json(task))
+router.route("/student").get((req, res) => {
+  Student.find()
+    .then((student) => res.status(200).json(student))
     .catch((err) => res.status(400).json(err));
 });
 
-router.route("/todo").post((req, res) => {
-  const task = req.body;
-  const id = task.id;
-  const message = task.message;
-  const completed = task.completed;
+router.route("/student").post((req, res) => {
+  const student = req.body;
+  const rollno = student.rollno;
+  const name = student.name;
+  const age = student.age;
 
-  const newTask = new Task({ id: id, message: message, completed: completed });
+  const newStudent = new Student({
+    rollno: rollno,
+    name: name,
+    age: age,
+  });
 
-  newTask
+  newStudent
     .save()
     .then(() => res.status(200).json("Successful !!"))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/todo").put((req, res) => {
-  const receivedtask = req.body;
+router.route("/student").put((req, res) => {
+  const receivedStudent = req.body;
 
-  const filter = { id: receivedtask.id };
+  const filter = { rollno: receivedStudent.rollno };
 
-  const replacementDocument = receivedtask;
+  const replacementDocument = receivedStudent;
 
-  Task.replaceOne(filter, replacementDocument)
+  Student.replaceOne(filter, replacementDocument)
     .then(() => {
       res.status(200).json("Successful");
     })
     .catch((err) => res.status(400).json(err));
 });
 
-router.route("/todo").delete((req, res) => {
-  const taskToBeDeleted = req.body;
+router.route("/student").delete((req, res) => {
+  const studentToBeDeleted = req.body;
 
-  Task.deleteOne({
-    id: taskToBeDeleted.id,
-    message: taskToBeDeleted.message,
-    completed: taskToBeDeleted.completed,
+  Student.deleteOne({
+    rollno: studentToBeDeleted.rollno,
+    name: studentToBeDeleted.name,
+    age: studentToBeDeleted.age,
   })
     .then((result) => {
       if (result.deletedCount === 1) res.status(200).json("Successful");
