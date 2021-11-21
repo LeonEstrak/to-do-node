@@ -9,11 +9,13 @@ router.route("/student").get((req, res) => {
 
 router.route("/student").post((req, res) => {
   const student = req.body;
+  const id = student.id;
   const rollno = student.rollno;
   const name = student.name;
   const age = student.age;
 
   const newStudent = new Student({
+    id: id,
     rollno: rollno,
     name: name,
     age: age,
@@ -28,7 +30,7 @@ router.route("/student").post((req, res) => {
 router.route("/student").put((req, res) => {
   const receivedStudent = req.body;
 
-  const filter = { rollno: receivedStudent.rollno };
+  const filter = { id: receivedStudent.id };
 
   const replacementDocument = receivedStudent;
 
@@ -43,6 +45,7 @@ router.route("/student").delete((req, res) => {
   const studentToBeDeleted = req.body;
 
   Student.deleteOne({
+    id: studentToBeDeleted.id,
     rollno: studentToBeDeleted.rollno,
     name: studentToBeDeleted.name,
     age: studentToBeDeleted.age,
